@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+
+{% block content %}
+  
+  <div class="page-header">
+    <h1>Welcome to Twitter.js!</h1>
+  </div>
+  {{selection}}
+
+  {{roles}}
+  <div class="row">
+    <div class="col-md-3">
+      <img src="https://pbs.twimg.com/profile_images/2450268678/olxp11gnt09no2y2wpsh_normal.jpeg"><br>
+      <b>Your Name</b><br>
+      100 followers
+      {% if showForm %}
+        <form action="/tweets" method="POST">
+          <div class="form-group">
+            <label for="name_field">Name:</label>
+            <input name="name" type="text" class="form-control" id="name_field" value="{{username}}"/>
+
+            <label for="text_field">Text:</label>
+            <input name="text" type="text" class="form-control" id="text_field" />
+
+            <input type="submit" class="btn btn-primary" value="Submit" />
+          </div>
+        </form>
+      {% endif %}
+    </div>
+    <div id="tweetlist" class="col-md-9">
+    
+      <!-- display tweets here -->
+      {% for role in roles %}
+        <div class="card">
+          <div class="card-block">
+            <h4 class="card-title">{{role.first_name}} {{role.last_name}} ({{role.gender}})</h4>
+            <h6 class="card-subtitle mb-2 text-muted">{{role.role}}</h6>
+            <p class="card-text">
+              Actor ID {{role.actor_id}}
+              Movie ID {{role.movie_id}}
+            </p>
+
+            <!--<a href="#" class="card-link">Card link</a>
+            <a href="#" class="card-link">Another link</a>-->
+          </div>
+        </div>
+      {% endfor %}
+      
+    </div>
+  </div>
+    
+{% endblock %}

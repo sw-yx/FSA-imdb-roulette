@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+
+{% block content %}
+  
+  <div class="page-header">
+    <h1>Welcome to IMDB Roulette!</h1>
+    <!--<form action="/tweets" method="POST">-->
+      <form class="form-inline">
+        <label class="mr-sm-2" for="inlineFormCustomSelect">Genre selection: </label>
+        <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="inlineFormCustomSelect">
+          <option selected value="">Choose...</option>
+          {% for g in genres %}
+            <option value="{{g}}">{{g}}</option>
+          {% endfor %}
+        </select>
+        <!--type="submit"-->
+        <!--onClick="e => {e.preventDefault(); socket.emit('newgenre', document.getElementById(inlineFormCustomSelect).value)}"-->
+        <button class="btn btn-primary" id="submitbtn">Submit</button>
+      </form>
+    <!--</form>-->
+  </div>
+  <div class="row">
+    <div class="col-md-3" id="movielevel">
+      <h1>{{selection.name}} ({{selection.year}})</h1><br>
+      <h3>
+        Rating: <b>{{selection.rank}}</b>
+      </h3>
+      <p>
+        Director: <b>{{selection.first_name}} {{selection.last_name}}</b>
+      </p>
+    </div>
+    <div id="tweetlist" class="col-md-9">
+      
+      {% for role in roles %}
+        <div class="card">
+          <div class="card-block">
+            <h4 class="card-title">{{role.first_name}} {{role.last_name}}</h4>
+            <p class="card-subtitle mb-2 text-muted">Character: {{role.role}}</p>
+            <p class="card-text">
+              Gender: {{role.gender}} | Actor ID {{role.actor_id}} | Movie ID {{role.movie_id}}
+            </p>
+
+            <!--<a href="#" class="card-link">Card link</a>
+            <a href="#" class="card-link">Another link</a>-->
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+    
+{% endblock %}
